@@ -43,7 +43,7 @@ sub _generate_import {
 				'my(%s)=(%s);',
 				$var,
 				defined($value) ? B::perlstring($value) : '',
-			);				
+			);
 		}
 		elsif (ref($value) eq q(CODE))
 		{
@@ -74,6 +74,8 @@ __END__
 =pod
 
 =encoding utf-8
+
+=for stopwords initializer initializers
 
 =head1 NAME
 
