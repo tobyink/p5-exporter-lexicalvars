@@ -67,7 +67,7 @@ sub _generate_import
 	return sub
 	{
 		shift;
-		@_ = sort keys(%inject) unless @_;		
+		@_ = sort keys(%inject) unless @_;
 		B::Hooks::Parser::inject(join ';', '', map $inject{$_}, @_);
 	};
 }
