@@ -14,7 +14,8 @@ our $VERSION     = '0.000_01';
 our %EXPORT_TAGS = ( setup => [qw(import)] );
 our @INIT;
 
-sub _generate_import {
+sub _generate_import
+{
 	my $me = shift;
 	my ($name, $args, $globals) = @_;
 	my $caller = $globals->{into};
@@ -22,7 +23,7 @@ sub _generate_import {
 	(my $nominal_file = $caller) =~ s(::)(/)g;
 	$INC{"$nominal_file\.pm"} ||= __FILE__;
 	
-	my $inject = ';';
+	my %inject;
 	for my $var (sort keys %$args)
 	{
 		unless ($var =~ /\A[\$\@\%][^\W0-9]\w*\z/)
@@ -39,7 +40,7 @@ sub _generate_import {
 		
 		if (!ref($value))
 		{
-			$inject .= sprintf(
+			$inject{$var} = sprintf(
 				'my(%s)=(%s);',
 				$var,
 				defined($value) ? B::perlstring($value) : '',
@@ -48,12 +49,11 @@ sub _generate_import {
 		elsif (ref($value) eq q(CODE))
 		{
 			push @INIT, $value;
-			my $init = $#INIT;
-			$inject .= sprintf(
+			$inject{$var} = sprintf(
 				'my(%s);$%s::INIT[%d]->(\\%s, %s);',
 				$var,
 				__PACKAGE__,
-				$init,
+				$#INIT,
 				$var,
 				B::perlstring($var),
 			);
@@ -64,7 +64,12 @@ sub _generate_import {
 		}
 	}
 	
-	return sub { B::Hooks::Parser::inject($inject) };
+	return sub
+	{
+		shift;
+		@_ = sort keys(%inject) unless @_;		
+		B::Hooks::Parser::inject(join ';', '', map $inject{$_}, @_);
+	};
 }
 
 1;
@@ -105,6 +110,12 @@ Exporter::LexicalVars - export lexical variables
 	}
 	
 	print Dumper($pi);        # 3
+	
+	{
+		use MyVars qw( $foo );
+		print Dumper($pi);     # 3
+		print Dumper($foo);    # Hello world
+	}
 
 =head1 DESCRIPTION
 

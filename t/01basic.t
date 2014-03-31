@@ -53,4 +53,10 @@ my $pi = 3;
 
 is($pi, 3);
 
+{
+	use MyVars qw( $foo );
+	is($pi, 3);
+	is($foo, 'Hello world');
+}
+
 done_testing;
