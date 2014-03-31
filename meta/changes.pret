@@ -4,3 +4,10 @@
 	issued  2014-03-30;
 	label   "Preview".
 
+`Exporter-LexicalVars 0.000_02 cpan:TOBYINK`
+	issued  2014-03-31;
+	label   "Preview";
+	changeset [
+		item "Allow lexical variable exporters to accept a list of which variables to import."^^Change;
+	].
+

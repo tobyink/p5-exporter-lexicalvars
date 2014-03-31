@@ -10,7 +10,7 @@ use Carp qw(croak);
 use Exporter::Shiny qw(import);
 
 our $AUTHORITY   = 'cpan:TOBYINK';
-our $VERSION     = '0.000_01';
+our $VERSION     = '0.000_02';
 our %EXPORT_TAGS = ( setup => [qw(import)] );
 our @INIT;
 
