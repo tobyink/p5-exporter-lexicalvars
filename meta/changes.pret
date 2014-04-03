@@ -11,7 +11,7 @@
 		item "Allow lexical variable exporters to accept a list of which variables to import."^^Change;
 	].
 
-`Exporter-LexicalVars 0.000_02 cpan:TOBYINK`
+`Exporter-LexicalVars 0.000_03 cpan:TOBYINK`
 	issued  2014-04-03;
 	label   "Preview";
 	changeset [

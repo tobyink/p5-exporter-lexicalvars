@@ -58,7 +58,7 @@ sub _handle_inject
 	
 	# Handle tag expansion
 	@_ = @{ $inject->{':default'} or $inject->{':all'} or [] } unless @_;
-	@_ = uniq map { 
+	@_ = uniq map {
 		/\A[:-](\w*)\z/
 			? @{ $inject->{":$1"} or croak("Tag $1 not exported by $package") }
 			: $_
