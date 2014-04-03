@@ -22,7 +22,7 @@ BEGIN {
 };
 
 our $AUTHORITY   = 'cpan:TOBYINK';
-our $VERSION     = '0.000_02';
+our $VERSION     = '0.000_03';
 our %EXPORT_TAGS = ( setup => [qw(import)] );
 our @INIT;
 
