@@ -18,3 +18,7 @@
 		item "Support export tags."^^Change;
 	].
 
+`Exporter-LexicalVars 0.001 cpan:TOBYINK`
+	issued  2014-04-03;
+	label   "Public release".
+
